@@ -1,0 +1,122 @@
+package student;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class MinMidMax<Type extends Comparable>
+{
+    private List<Comparable> speicher = new ArrayList<>();
+
+    @SafeVarargs
+    public MinMidMax(Comparable... names)
+    {
+        for (int i = 0; i < names.length; i++)
+        {
+            push(names[i]);
+        }
+    }
+
+    public int getNumItems()
+    {
+        return speicher.size();
+    }
+
+    public boolean push(Comparable name)
+    {
+        for (int i = 0; i < speicher.size(); i++)
+        {
+           if(speicher.get(i).equals(name))
+           {
+               return false;
+           }
+        }
+        speicher.add(name);
+        Collections.sort(speicher);
+        return true;
+    }
+
+    public Comparable popRight()
+    {
+        Comparable max = getMaximum();
+        if(max == null)
+        {
+            return null;
+        } else {
+            speicher.remove(max);
+            return max;
+        }
+
+    }
+
+    public Comparable popLeft()
+    {
+        Comparable min = getMinimum();
+        if(min == null)
+        {
+            return null;
+        } else {
+            speicher.remove(min);
+            return min;
+        }
+
+    }
+
+    public Comparable getMinimum()
+    {
+        if(speicher.size()== 0)
+        {
+            return null;
+        } else {
+            return speicher.get(0);
+        }
+    }
+
+    public Comparable getMaximum()
+    {
+        if(speicher.size() == 0)
+        {
+            return null;
+        } else {
+            return speicher.get(speicher.size()-1);
+        }
+    }
+
+    public Comparable getMid()
+    {
+        if(speicher.size() == 0)
+        {
+            return null;
+        } else if(speicher.size()%2 == 0) {
+            return speicher.get(speicher.size()/2);
+        } else {
+            return speicher.get((int) (speicher.size()/2+0.5));
+        }
+    }
+
+    @Override
+    public String toString() {
+
+        String ausgabe = "";
+        for (int i = 0; i < speicher.size(); i++) {
+            if(i == speicher.size()-1)
+            {
+                ausgabe = ausgabe + speicher.get(i);
+            } else {
+                ausgabe = ausgabe + speicher.get(i) + " ";
+            }
+        }
+        return "[" + ausgabe + "]";
+    }
+
+    public void addObserver()
+    {
+
+    }
+
+
+    public void removeObserver()
+    {
+
+    }
+}

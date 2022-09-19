@@ -1,0 +1,9 @@
+package student;
+
+public interface ListObserver<T extends Comparable>
+{
+    public void pushedToList(T ausloeser, Comparable element);
+
+    public void poppedFromList(T ausloeser, Comparable element);
+
+}
